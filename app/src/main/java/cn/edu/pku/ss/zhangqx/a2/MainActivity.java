@@ -69,9 +69,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         if(view.getId()==R.id.title_city_manager){
             Intent i=new Intent(this,SelectCity.class);
-            //startActivity(i);
-            startActivityForResult(i,1);
-        }
+            startActivity(i);
+            startActivityForResult(i,1);     }
         if (view.getId() == R.id.title_update_btn) {
             SharedPreferences sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
             String cityCode = sharedPreferences.getString("main_city_code", "101010100");
@@ -104,7 +103,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @param cityCode
     */
     private void queryWeatherCode(String cityCode) {
-        final String address = "http://wthrcdn.etouch.cn/Weather Api?citykey=" + cityCode;
+        final String address = "http://wthrcdn.etouch.cn/WeatherApi?citykey=" + cityCode;
         Log.d("myWeather", address);
         new Thread(new Runnable() {
             @Override
@@ -235,10 +234,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         cityTv = (TextView) findViewById(R.id.city);
         timeTv = (TextView) findViewById(R.id.time);
         humidityTv = (TextView) findViewById(R.id.humidity);
-        wenduTv = (TextView) findViewById(R.id.current_temperature);
+        wenduTv = (TextView) findViewById(R.id.wendu);
         weekTv = (TextView) findViewById(R.id.week_today);
         pmDataTv = (TextView) findViewById(R.id.pm_data);
-        pmQualityTv = (TextView) findViewById(R.id.pm_2_5_qualityty);
+        pmQualityTv = (TextView) findViewById(R.id.pm2_5_quality);
         pmImg = (ImageView) findViewById(R.id.pm2_5_img);
         temperatureTv = (TextView) findViewById(R.id.temperature);
         climateTv = (TextView) findViewById(R.id.climate);
