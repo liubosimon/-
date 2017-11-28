@@ -19,7 +19,7 @@ public class City {
         this.allPY = allPY;
         this.allFristPY = allFristPY;
     }
-    private String getProvince(){return province;}
+    public String getProvince(){return province;}
     public String getCity(){return city;}
     public String getNumber(){return number;}
 
