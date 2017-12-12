@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import android.app.Application;
 import android.os.Environment;
 import android.util.Log;
@@ -16,20 +15,21 @@ import cn.edu.pku.bean.City;
  * Created by Administrator on 2017/11/4.
  */
 
-public class MyApplication extends Application{
-    private static final String TAG="My App";
+public class MyApplication extends Application {
+    private static final String TAG ="MyAPP";
     private static MyApplication mApplication;
     private CityDB mCityDB;
     private List<City> mCityList;
     @Override
-    public void onCreate(){
+    public void onCreate() {
         super.onCreate();
-        Log.d(TAG,"MyApplication->onCreate");
-        mApplication = this;
-        mCityDB = openCityDB();
+        Log.d(TAG,"MyApplication->Oncreate");
+        mApplication=this;
+        mCityDB=openCityDB();
         initCityList();
     }
-    private void initCityList(){
+
+    private void initCityList(){        //初始化列表
         mCityList = new ArrayList<City>();
         new Thread(new Runnable() {
             @Override
@@ -39,6 +39,7 @@ public class MyApplication extends Application{
             }
         }).start();
     }
+
     private boolean prepareCityList() {
         mCityList = mCityDB.getAllCity();
         int i=0;
@@ -51,13 +52,16 @@ public class MyApplication extends Application{
         Log.d(TAG,"i="+i);
         return true;
     }
+
     public List<City> getCityList() {
         return mCityList;
     }
-    public static MyApplication getInstance(){
+
+    public MyApplication getInstance() {
         return mApplication;
-}
-    private CityDB openCityDB() {
+    }
+
+    private CityDB openCityDB() {        //打开数据库
         String path = "/data"
                 + Environment.getDataDirectory().getAbsolutePath()
                 + File.separator + getPackageName()
@@ -95,4 +99,7 @@ public class MyApplication extends Application{
             }
         }
         return new CityDB(this, path);
-    }}
+    }
+
+}
+

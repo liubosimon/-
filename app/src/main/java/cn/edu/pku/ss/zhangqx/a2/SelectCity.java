@@ -11,15 +11,32 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import cn.edu.pku.app.MyApplication;
 import cn.edu.pku.bean.City;
 
 /**
  * Created by kk on 2017/10/18.
+ */
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by xchen on 16/12/19.
  */
 
 public class SelectCity extends Activity implements View.OnClickListener {
@@ -66,7 +83,7 @@ public class SelectCity extends Activity implements View.OnClickListener {
             String number= mCityList.get(i).getNumber();
             String provinceName = mCityList.get(i).getProvince();
             String cityName = mCityList.get(i).getCity();
-            ls.add("NO."+No_+":"+number+"-"+provinceName+"-"+cityName);
+            ls.add(provinceName+"-"+cityName);
         }
         mList=(ListView)findViewById(R.id.title_list);
         adapter=new ArrayAdapter<String>(SelectCity.this,android.R.layout.simple_list_item_1,ls);   //创建适配器
@@ -86,12 +103,6 @@ public class SelectCity extends Activity implements View.OnClickListener {
                     updateCityCode = mCityList.get(position).getNumber();
                 }
                 Log.d("update city code",updateCityCode);
-
-                //用Shareperference 存储最近一次的citycode
-                SharedPreferences sharedPreferences = getSharedPreferences("CityCodePreference",Activity.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("citycode",updateCityCode);
-                editor.commit();
 
                 intent.putExtra("citycode",updateCityCode);
                 startActivity(intent);
@@ -129,7 +140,7 @@ public class SelectCity extends Activity implements View.OnClickListener {
                         searched = true;
                         selectNo = Integer.toString(i);
                         ls.clear();
-                        ls.add("NO." + No_ + ":" + number + "-" + provinceName + "-" + cityName);
+                        ls.add(provinceName + "-" + cityName);
                         Log.d("changed adapter data", "NO." + No_ + ":" + number + "-" + provinceName + "-" + cityName);
                     }
 
@@ -142,6 +153,3 @@ public class SelectCity extends Activity implements View.OnClickListener {
         }
     }
 }
-
-
-
