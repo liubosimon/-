@@ -26,7 +26,7 @@ public class MyApplication extends Application {
         Log.d(TAG,"MyApplication->Oncreate");
         mApplication=this;
         mCityDB=openCityDB();
-        initCityList();
+        initCityList();//
     }
 
     private void initCityList(){        //初始化列表
@@ -102,6 +102,5 @@ public class MyApplication extends Application {
     }
 
 }
-
 
 
